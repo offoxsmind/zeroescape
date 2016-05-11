@@ -1,0 +1,53 @@
+{
+    "appKeys": {
+        "HOUR_KEY": 0
+    },
+    "capabilities": [
+        ""
+    ],
+    "companyName": "somberfox@gmail.com",
+    "enableMultiJS": true,
+    "longName": "Zero Escape",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/zerowatch.png",
+                "name": "hexa",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "characterRegex": "[0-9, :]",
+                "file": "fonts/digital display tfb.ttf",
+                "name": "font80",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[ , a, m, p,  0-9, :]",
+                "file": "fonts/DS-DIGIT.TTF",
+                "name": "font48",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[P, A, I, R]",
+                "file": "fonts/DS-DIGIT.TTF",
+                "name": "font32",
+                "targetPlatforms": null,
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Zero Escape",
+    "targetPlatforms": [
+        "chalk"
+    ],
+    "uuid": "5c2d2769-8c81-4a45-9174-cb7221a1472f",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
