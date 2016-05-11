@@ -48,11 +48,15 @@ static void update_time() {
   static char s_time_buffer[8];
   strftime(s_time_buffer, sizeof(s_time_buffer), clock_is_24h_style() ?
                                           "%H:%M" : "%I:%M", tick_time);
-  
+
 
   int hour = tick_time->tm_hour;
-  //APP_LOG(APP_LOG_LEVEL_DEBUG, "hour: %d", hour);
-  persist_write_int(HOUR_KEY, hour);
+  
+  GColor hour_color = ((GColor)mycolor[hour]);
+  
+  text_layer_set_text_color(s_time_layer, hour_color);
+  text_layer_set_text_color(s_text_layer, hour_color);
+  text_layer_set_text_color(s_hour_layer, hour_color);
            
   // Show the hour
   text_layer_set_text(s_hour_layer, s_day_buffer);
@@ -92,9 +96,6 @@ static void window_load(Window *s_window) {
   s_date_font2 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_font32));
   s_date_font3 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_font48));
   
-  int hour = persist_read_int(HOUR_KEY);
-  //APP_LOG(APP_LOG_LEVEL_DEBUG, "hour: %d", hour);
-  GColor hour_color = ((GColor)mycolor[hour]);
   
   //Background
   s_background_map = gbitmap_create_with_resource(RESOURCE_ID_hexa);
@@ -107,7 +108,6 @@ static void window_load(Window *s_window) {
   s_hour_layer = text_layer_create PBL_IF_ROUND_ELSE((GRect(65, 41, 90, 130)), (GRect(39,49,70,70)));
   text_layer_set_background_color(s_hour_layer, GColorClear);
   PBL_IF_ROUND_ELSE((text_layer_set_font(s_hour_layer, s_date_font)), (text_layer_set_font(s_hour_layer, s_date_font2)));
-  text_layer_set_text_color(s_hour_layer, hour_color);
   text_layer_set_text_alignment(s_hour_layer, GTextAlignmentCenter);
   layer_add_child(window_get_root_layer(s_window), text_layer_get_layer(s_hour_layer));
   layer_set_hidden((Layer *)s_hour_layer, false);
@@ -117,7 +117,6 @@ static void window_load(Window *s_window) {
   text_layer_set_background_color(s_text_layer, GColorClear);
   text_layer_set_font(s_text_layer, s_date_font2);
   text_layer_set_text(s_text_layer, "PA IR");
-  text_layer_set_text_color(s_text_layer, hour_color);
   text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
   layer_add_child(window_get_root_layer(s_window), text_layer_get_layer(s_text_layer));
   layer_set_hidden((Layer *)s_text_layer, false);
@@ -125,7 +124,6 @@ static void window_load(Window *s_window) {
   //Time
   s_time_layer = text_layer_create(GRect(20, 55, 140, 70));
   text_layer_set_background_color(s_time_layer, GColorClear);
-  text_layer_set_text_color(s_time_layer, hour_color);
   text_layer_set_font(s_time_layer, s_date_font3);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   layer_add_child(window_get_root_layer(s_window), text_layer_get_layer(s_time_layer));
@@ -164,7 +162,6 @@ static void init() {
   accel_tap_service_subscribe(tap_handler);
   tick_timer_service_subscribe(SECOND_UNIT, handle_second_tick);
   
-  update_time();
   
 }
 
