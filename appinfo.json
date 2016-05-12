@@ -1,7 +1,5 @@
 {
-    "appKeys": {
-        "HOUR_KEY": 0
-    },
+    "appKeys": {},
     "capabilities": [
         ""
     ],
@@ -46,7 +44,7 @@
         "chalk"
     ],
     "uuid": "5c2d2769-8c81-4a45-9174-cb7221a1472f",
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": true
     }
